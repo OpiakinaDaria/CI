@@ -1,7 +1,6 @@
 package ru.netology.rest;
 
 import io.restassured.http.ContentType;
-import io.restassured.response.ValidatableResponse;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
@@ -11,12 +10,9 @@ import static org.hamcrest.Matchers.*;
 class MobileBankApiTestV3 {
     @Test
     void shouldReturnDemoAccounts() {
-      // Given - When - Then
-      // Предусловия
-        // Выполняемые действия
-        // Проверки
-        // специализированные проверки - лучше
-        ValidatableResponse body = given()
+        // Given - When - Then
+        // Предусловия
+        given()
                 .baseUri("http://localhost:9999/api/v1")
                 // Выполняемые действия
                 .when()
@@ -28,6 +24,7 @@ class MobileBankApiTestV3 {
                 .contentType(ContentType.JSON)
                 .body("", hasSize(3))
                 .body("[0].currency", equalTo("RUB"))
-                .body("[0].balance", greaterThanOrEqualTo(992821429));
+                .body("[0].balance", greaterThanOrEqualTo(0))
+        ;
     }
 }
