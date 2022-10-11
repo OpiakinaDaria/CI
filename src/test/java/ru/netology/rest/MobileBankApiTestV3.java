@@ -1,15 +1,17 @@
 package ru.netology.rest;
 
 import io.restassured.http.ContentType;
-import org.hamcrest.Matchers;
+import io.restassured.specification.Argument;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 class MobileBankApiTestV3 {
     @Test
-    void shouldReturnDemoAccounts() {
+    void shouldReturnDemoAccounts(List<Argument>[] equalTo) {
         // Given - When - Then
         // Предусловия
         given()
@@ -23,10 +25,8 @@ class MobileBankApiTestV3 {
                 // специализированные проверки - лучше
                 .contentType(ContentType.JSON)
                 .body("", hasSize(3))
-                .body("[0].currency", equalTo("RUB"))
-                .body("[1].currency", equalTo("USD"))
-                .body("[2].currency", equalTo("RUB"))
-                .body("[0].balance", greaterThanOrEqualTo(0))
-        ;
+                .body("enum:["RUB",”USD”].currency", equalTo ("USD","RUB"));
+                //.body("[0].balance", greaterThanOrEqualTo(0));
     }
+
 }
