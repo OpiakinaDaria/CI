@@ -14,6 +14,9 @@ class MobileBankApiTestV3 {
     void shouldReturnDemoAccounts(List<Argument>[] equalTo) {
         // Given - When - Then
         // Предусловия
+        // Выполняемые действия
+        // Проверки
+        // специализированные проверки - лучше
         given()
                 .baseUri("http://localhost:9999/api/v1")
                 // Выполняемые действия
@@ -25,7 +28,7 @@ class MobileBankApiTestV3 {
                 // специализированные проверки - лучше
                 .contentType(ContentType.JSON)
                 .body("", hasSize(3))
-                .body("enum:["RUB",”USD”].currency", equalTo ("USD","RUB"));
+                .body("enum:[«RUB»,”USD”].currency", equalTo("RUB"), "USD");
                 //.body("[0].balance", greaterThanOrEqualTo(0));
     }
 
